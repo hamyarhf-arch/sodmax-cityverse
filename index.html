@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل کاربری SODmAX CityVerse</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Authentication Container -->
+    <div id="authContainer" class="auth-container">
+        <div class="auth-card" id="loginCard">
+            <div class="auth-header">
+                <h2><i class="fas fa-shield-alt"></i> ورود به SODmAX</h2>
+                <p>شماره موبایل و رمز عبور خود را وارد کنید</p>
+            </div>
+            
+            <div id="authMessage" class="message hidden"></div>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginPhone">شماره موبایل</label>
+                    <input type="tel" id="loginPhone" placeholder="09123456789" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">رمز عبور</label>
+                    <input type="password" id="loginPassword" placeholder="رمز عبور" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> ورود به حساب
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <button onclick="showRegister()" class="link-btn">
+                    حساب کاربری ندارید؟ ثبت‌نام کنید
+                </button>
+            </div>
+        </div>
+        
+        <div class="auth-card hidden" id="registerCard">
+            <div class="auth-header">
+                <h2><i class="fas fa-user-plus"></i> ثبت‌نام در SODmAX</h2>
+                <p>فرم زیر را برای ایجاد حساب جدید پر کنید</p>
+            </div>
+            
+            <div id="registerMessage" class="message hidden"></div>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">نام و نام خانوادگی</label>
+                    <input type="text" id="registerName" placeholder="علی محمدی" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">شماره موبایل</label>
+                    <input type="tel" id="registerPhone" placeholder="09123456789" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">رمز عبور</label>
+                    <input type="password" id="registerPassword" placeholder="حداقل ۶ کاراکتر" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerReferral">کد دعوت (اختیاری)</label>
+                    <input type="text" id="registerReferral" placeholder="کد دعوت معرف">
+                </div>
+                
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-user-plus"></i> ایجاد حساب کاربری
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <button onclick="showLogin()" class="link-btn">
+                    قبلاً ثبت‌نام کرده‌اید؟ وارد شوید
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main App Container -->
+    <div id="appContainer" class="hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>SODmAX</span>
+                <small>CityVerse</small>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">ع</div>
+                <div class="user-details">
+                    <div class="user-name" id="userName">کاربر تست</div>
+                    <div class="user-level">سطح <span id="userLevel">5</span></div>
+                </div>
+                <button onclick="logout()" class="btn btn-outline">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Dashboard Section -->
+            <section id="dashboardSection" class="section">
+                <h2><i class="fas fa-tachometer-alt"></i> داشبورد</h2>
+                
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-value" id="sodBalance">1,845,200</div>
+                        <div class="stat-label">SOD</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-value" id="tomanBalance">28,400</div>
+                        <div class="stat-label">تومان</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" id="referralCount">24</div>
+                        <div class="stat-label">زیرمجموعه</div>
+                    </div>
+                </div>
+                
+                <!-- Mining Center -->
+                <div class="card">
+                    <h3><i class="fas fa-hard-hat"></i> مرکز استخراج</h3>
+                    
+                    <div class="miner">
+                        <div class="miner-circle" onclick="manualMine()">
+                            <i class="fas fa-bolt miner-icon"></i>
+                            <div class="miner-reward" id="clickReward">+180 SOD</div>
+                            <div class="miner-hint">برای استخراج کلیک کنید</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mining-controls">
+                        <button onclick="manualMine()" class="btn btn-primary">
+                            <i class="fas fa-hand-pointer"></i> استخراج دستی
+                        </button>
+                        <button onclick="upgradeMiner()" class="btn btn-warning">
+                            <i class="fas fa-arrow-up"></i> ارتقاء ماینر
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Active Missions -->
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> مأموریت‌های فعال</h3>
+                    
+                    <div id="missionsList">
+                        <!-- Missions will be loaded here -->
+                    </div>
+                    
+                    <button onclick="loadMissions()" class="btn btn-outline">
+                        <i class="fas fa-sync-alt"></i> بروزرسانی
+                    </button>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-nav">
+                <button onclick="showSection('dashboard')" class="nav-btn active">
+                    <i class="fas fa-home"></i>
+                    <span>داشبورد</span>
+                </button>
+                <button onclick="showSection('mining')" class="nav-btn">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>استخراج</span>
+                </button>
+                <button onclick="showSection('wallet')" class="nav-btn">
+                    <i class="fas fa-wallet"></i>
+                    <span>کیف پول</span>
+                </button>
+                <button onclick="showSection('missions')" class="nav-btn">
+                    <i class="fas fa-tasks"></i>
+                    <span>مأموریت‌ها</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+    
+    <!-- Scripts -->
+    <script src="test-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
